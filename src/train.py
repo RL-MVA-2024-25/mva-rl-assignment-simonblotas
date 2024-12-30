@@ -21,13 +21,13 @@ class ProjectAgent:
             return torch.argmax(Q).item()
 
     def save(self, path):
-        self.path = current_path + "\\final_dqn.pt"
+        self.path = path + "/final_dqn.pt"
         torch.save(self.model.state_dict(), self.path)
         return
 
     def load(self):
         device =  torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        self.path = current_path + "\\final_dqn.pt"
+        self.path = current_path + "/final_dqn.pt"
         self.model = DQN.to(device)
         self.model.load_state_dict(torch.load(self.path, map_location=device))
         self.model.eval()
